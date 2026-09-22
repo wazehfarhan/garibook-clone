@@ -1,0 +1,288 @@
+/* Visible focus ring for keyboard users on every interactive element. */
+:where(a, button, [role="tab"], input, select, textarea):focus-visible {
+  outline: 3px solid var(--primary-gb);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ============ Fonts (exact files garibook.com serves) ============ */
+@font-face {
+  font-family: "Uncut Sans";
+  src: url("/fonts/uncut-sans/UncutSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Uncut Sans";
+  src: url("/fonts/uncut-sans/UncutSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Uncut Sans";
+  src: url("/fonts/uncut-sans/UncutSans-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Uncut Sans";
+  src: url("/fonts/uncut-sans/UncutSans-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat/Montserrat-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ============ Design tokens (extracted from garibook.com) ============ */
+:root {
+  --primary-gb: #0e52ff;
+  --primary-dark-gb: #0038c4;
+  --warning-gb: #fdd300;
+  --warning-bg-gb: #efc30c;
+  --black: #000;
+  --body: #212121;
+  --muted: #6d6d6d;
+  --light-gray-gb: #f1f6ff;
+  --border: #e5e5e5;
+  --heading-font: "Montserrat", sans-serif;
+  --nav-font: "Uncut Sans", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--heading-font);
+  color: var(--body);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, div, a, label, li, small {
+  font-family: var(--heading-font);
+}
+
+/* ============ Layout helpers ============ */
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.section-padding {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.section-margin-mt-50 {
+  margin-top: 50px;
+}
+
+.section-margin-mb-70 {
+  margin-bottom: 70px;
+}
+
+.bg-black {
+  background-color: var(--black);
+}
+
+.bg-primary-gb {
+  background: var(--primary-gb);
+}
+
+.bg-warning-gb {
+  background: var(--warning-bg-gb);
+}
+
+.bg-light-gray-gb {
+  background: var(--light-gray-gb);
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-warning-gb {
+  color: var(--warning-gb);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.my-4 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+.mb-0 { margin-bottom: 0; }
+.mt-2 { margin-top: 0.5rem; }
+.rounded-4 { border-radius: 1rem; }
+.rounded-top-3 { border-radius: 1rem 1rem 0 0; }
+.fw-semibold { font-weight: 600; }
+.fw-bold { font-weight: 700; }
+.fs-5 { font-size: 1.25rem; }
+.object-fit-cover { object-fit: cover; }
+
+/* ============ Section header ============ */
+.section-header h2 {
+  color: #212121;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 54px;
+  letter-spacing: 0;
+  margin: 0;
+  font-style: normal;
+}
+
+.section-header p {
+  color: #6d6d6d;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .section-header p {
+    font-size: 18px;
+    line-height: 26px;
+  }
+  .section-padding {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+}
+
+/* ============ Buttons ============ */
+.theme-primary-btn,
+.theme-warning-btn,
+.theme-outline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 15px;
+  font-family: var(--heading-font);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border: 0;
+}
+
+.theme-primary-btn {
+  background: var(--primary-gb);
+  color: #fff;
+}
+
+.theme-warning-btn {
+  background: var(--warning-gb);
+  color: #121212;
+}
+
+.theme-outline-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-icon {
+  width: 15px;
+  height: 15px;
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.theme-primary-btn:hover {
+  background: var(--primary-dark-gb);
+  color: #fff;
+}
+
+.theme-warning-btn:hover {
+  background: #121212;
+  color: #fff;
+}
+
+.theme-outline-btn:hover {
+  border-color: var(--warning-gb);
+  color: var(--warning-gb);
+}
+
+.theme-primary-btn:hover .btn-icon,
+.theme-warning-btn:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+/* ============ Custom slider arrows ============ */
+.customer_style_wrap {
+  display: inline-flex;
+  gap: 12px;
+}
+
+.custom-slider-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-gb);
+  background: transparent;
+  color: var(--primary-gb);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-slider-arrow:hover:not(:disabled) {
+  background: var(--primary-gb);
+  color: #fff;
+}
+
+.custom-slider-arrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============ misc ============ */
+.mb-20 {
+  margin-bottom: 20px;
+}

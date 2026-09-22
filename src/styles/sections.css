@@ -1,0 +1,169 @@
+/* ============ Booking to Arrival ============ */
+.booking-arrival-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.booking-arrival-header .section-header h2 {
+  max-width: 640px;
+  color: #fff;
+  opacity: 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.booking-arrival-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ba-grid-item {
+  min-width: 0;
+}
+
+.ba-grid-item.col-8 {
+  flex: 0 0 calc(66.666% - 8px);
+}
+
+.ba-grid-item.col-top4 {
+  flex: 0 0 calc(33.334% - 8px);
+}
+
+.ba-grid-item.col-4 {
+  flex: 0 0 calc(33.333% - 11px);
+}
+
+.booking-arrival-inner-image img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.booking-arrival-inner-image {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 992px) {
+  .ba-grid-item.col-8,
+  .ba-grid-item.col-top4 {
+    flex: 1 1 100%;
+  }
+  .ba-grid-item.col-4 {
+    flex: 1 1 calc(50% - 8px);
+  }
+}
+
+/* ============ Smart Driver (0% commission) ============ */
+.no-commission-wrapper .section-content {
+  padding: 48px;
+}
+
+.smart-driver-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.smart-driver-text {
+  flex: 1 1 380px;
+}
+
+.common-section-layout-one-text h2 {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 52px;
+  margin: 0;
+}
+
+.smart-driver-image {
+  flex: 1 1 320px;
+  text-align: center;
+}
+
+.no-commission-image img {
+  max-width: 420px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .no-commission-wrapper .section-content {
+    padding: 28px;
+  }
+  .common-section-layout-one-text h2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+}
+
+/* ============ Featured By ============ */
+.featured-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.newsroom-slider-wrap .embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  gap: 16px;
+}
+
+.embla__slide {
+  flex: 0 0 33.333%;
+  min-width: 0;
+}
+
+.newsroom-card {
+  height: 100%;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.newsroom-tag {
+  display: inline-block;
+  background: var(--light-gray-gb);
+  color: var(--primary-gb);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  padding: 6px 14px;
+  border-radius: 30px;
+}
+
+.newsroom-card h4 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 16px 0 8px;
+}
+
+.newsroom-card p {
+  color: #6d6d6d;
+  font-size: 15px;
+  line-height: 24px;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .embla__slide {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .embla__slide {
+    flex: 0 0 100%;
+  }
+}

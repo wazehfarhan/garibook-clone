@@ -1,0 +1,211 @@
+/* ============ Booking form card (choose-trip-details-wrapper) ============ */
+.ctd-wrap {
+  position: relative;
+  z-index: 6;
+}
+
+.ctd-w-navs {
+  display: inline-flex;
+  gap: 12px;
+}
+
+.ctd-w-navs .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: 0;
+  border-radius: 15px 15px 0 0;
+  background: #e9e9e9;
+  color: #121212;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ctd-w-navs .nav-link.active {
+  background: #fff;
+  color: var(--primary-gb);
+}
+
+.ctd-w-navs .tab-icon {
+  color: var(--primary-gb);
+}
+
+.ctd-w-nav-contents {
+  background: #fff;
+  border-radius: 0 20px 20px 20px;
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  min-height: 208px;
+}
+
+.ctd-form-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.ctd-w-input-wrap {
+  flex: 1 1 0;
+  min-width: 240px;
+  padding: 0 28px 0 0;
+}
+
+.ctd-w-input-r-border {
+  border-right: 1px solid #e5e5e5;
+  margin-right: 28px;
+}
+
+.ctd-w-input-wrap:last-child {
+  padding-right: 0;
+  border-right: 0;
+  margin-right: 0;
+}
+
+.ctd-w-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 200px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #121212;
+  margin-bottom: 12px;
+}
+
+.form-label-hidden {
+  visibility: hidden;
+}
+
+.label-icon {
+  color: var(--primary-gb);
+}
+
+/* dropdown */
+.gb-dropdown {
+  position: relative;
+}
+
+.gb-dropdown .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 13px 16px;
+  background: #fff;
+  color: #121212;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: var(--heading-font);
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.gb-dropdown .dropdown-toggle:hover {
+  border-color: var(--primary-gb);
+}
+
+.dd-arrow {
+  color: #6d6d6d;
+}
+
+.gb-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  z-index: 30;
+  max-height: 260px;
+  overflow: auto;
+  padding: 6px;
+}
+
+.gb-dropdown-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #212121;
+  cursor: pointer;
+}
+
+.gb-dropdown-menu button:hover {
+  background: var(--light-gray-gb);
+  color: var(--primary-gb);
+}
+
+/* radios */
+.trip-type-group {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+}
+
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.form-check input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkbox-mark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #c4c4c4;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.form-check input:checked + .checkbox-mark {
+  border-color: var(--primary-gb);
+  background: var(--primary-gb);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.form-check-label {
+  font-size: 15px;
+  color: #212121;
+}
+
+@media (max-width: 992px) {
+  .ctd-w-nav-contents {
+    padding: 20px;
+  }
+  .ctd-w-input-wrap {
+    min-width: 100%;
+    padding-right: 0;
+    border-right: 0;
+    margin-right: 0;
+    margin-bottom: 18px;
+  }
+  .ctd-w-btn-wrap {
+    min-width: 100%;
+  }
+}

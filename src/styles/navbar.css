@@ -1,0 +1,254 @@
+/* ============ Navbar (garibook.com theme-navbar-wrapper) ============ */
+.theme-navbar-wrapper {
+  position: relative;
+  width: 100%;
+  z-index: 100;
+  margin-top: 48px;
+  padding: 16px 6px;
+}
+
+.theme-navbar-wrapper .container {
+  background: #fff;
+  border-radius: 30px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
+}
+
+.theme-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 24px;
+  min-height: 76px;
+}
+
+.brand-logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-theme-link {
+  position: relative;
+  color: #121212;
+  text-align: center;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.54px;
+  font-family: var(--nav-font);
+  padding: 6px 0;
+  white-space: nowrap;
+}
+
+.nav-theme-link::after {
+  transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-gb);
+  transform: translate(-50%, -50%);
+  border-radius: 61px;
+}
+
+.nav-theme-link:hover::after {
+  left: 50%;
+  width: 100%;
+  right: auto;
+}
+
+.nav-theme-link:hover,
+.nav-theme-link.active-menu {
+  color: var(--primary-gb);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-auth-item {
+  color: #121212;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: var(--nav-font);
+}
+
+/* single login pill in the navbar (desktop only) */
+.nav-login-desktop {
+  font-size: 16px;
+  font-weight: 600;
+  color: #121212;
+  padding: 9px 26px;
+  border: 1.5px solid var(--primary-gb);
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.nav-login-desktop:hover {
+  background: var(--primary-gb);
+  color: #fff;
+}
+
+.theme-navbar-wrapper.is-sticky .nav-login-desktop {
+  background: var(--primary-gb);
+  color: #fff;
+}
+
+/* English language switch — slides out of the navbar after scrolling (sticky) */
+.language-toggle,
+.language-title {
+  color: #121212;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: var(--nav-font);
+  border-left: 1px solid #e5e5e5;
+  padding-left: 20px;
+}
+
+.language-title {
+  cursor: pointer;
+  transition: opacity 0.4s cubic-bezier(0.645, 0.045, 0.355, 1),
+    transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1),
+    visibility 0.4s, padding 0.4s, border-color 0.4s;
+}
+
+.language-title:hover {
+  color: var(--primary-gb);
+}
+
+.language-title.lang-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(14px);
+  padding-left: 0;
+  border-left-color: transparent;
+  pointer-events: none;
+}
+
+.nav-download-btn {
+  padding: 12px 24px;
+}
+
+.navbar-toggler {
+  display: none;
+  background: none;
+  border: 0;
+  color: #121212;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.offcanvas-backdrop {
+  display: none;
+}
+
+/* ============ Sticky state ============ */
+.theme-navbar-wrapper.is-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin-top: 0;
+  padding: 12px;
+  animation: slideDown 0.5s ease-out;
+}
+
+.theme-navbar-wrapper.is-sticky .container {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* ============ Mobile ============ */
+@media (max-width: 1200px) {
+  .nav-menu {
+    gap: 20px;
+  }
+  .nav-theme-link {
+    font-size: 15px;
+    letter-spacing: -0.3px;
+  }
+}
+
+@media (max-width: 992px) {
+  .theme-navbar-wrapper {
+    margin-top: 16px;
+  }
+  .navbar-toggler {
+    display: inline-flex;
+  }
+  .nav-menu {
+    display: none;
+  }
+  .offcanvas-body.show .nav-menu {
+    display: block;
+  }
+  .offcanvas-body {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: #fff;
+    z-index: 1051;
+    transition: right 0.4s ease;
+    padding: 80px 28px 28px;
+    display: block;
+  }
+  .offcanvas-body.show {
+    right: 0;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+  }
+  .offcanvas-body .nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .offcanvas-body.show .nav-menu {
+    display: flex;
+  }
+  .nav-theme-link {
+    font-size: 20px;
+  }
+  .offcanvas-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+  }
+  .offcanvas-body.show ~ .offcanvas-backdrop {
+    display: block;
+  }
+  .nav-right .header-auth-item,
+  .nav-right .language-title,
+  .nav-right .nav-download-btn {
+    display: none;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

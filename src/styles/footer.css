@@ -1,0 +1,235 @@
+/* ============ Footer (garibook.com) ============ */
+.footer-wrapper {
+  background: var(--black);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-wrap {
+  position: relative;
+}
+
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 44px;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  display: inline-block;
+}
+
+.footer-logo img {
+  height: 46px;
+  width: auto;
+}
+
+.footer-partners {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin-top: 56px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-partner {
+  flex: 1 1 300px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-partner h5 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--warning-gb);
+  margin: 0 0 10px;
+}
+
+.footer-main-wrap {
+  position: relative;
+  z-index: 1;
+  padding-top: 70px;
+  padding-bottom: 40px;
+}
+
+.footer-top-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.footer-brand-col {
+  flex: 1 1 280px;
+  max-width: 360px;
+}
+
+.footer-brand-col img {
+  height: 46px;
+  width: auto;
+}
+
+.footer-brand-col p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  line-height: 26px;
+  margin: 20px 0 24px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-socials a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.footer-socials a:hover {
+  background: var(--warning-gb);
+  border-color: var(--warning-gb);
+  color: #121212;
+}
+
+.footer-widget {
+  flex: 1 1 180px;
+}
+
+.footer-widget-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: -0.6px;
+  margin-bottom: 22px;
+}
+
+.footer-widget-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-widget-list .hover-style-link {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+}
+
+.hover-style-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.hover-style-link::after {
+  transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  right: 0;
+  width: 0;
+  height: 1px;
+  background-color: #fdd300;
+}
+
+.hover-style-link:hover {
+  color: #fdd300;
+}
+
+.hover-style-link:hover::after {
+  left: 0;
+  width: 100%;
+  right: auto;
+}
+
+/* Product by / powered by rows */
+.footer-products {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.footer-product-box {
+  flex: 1 1 300px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-title-one {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  color: #fff;
+  margin: 0;
+}
+
+.footer-product-box h5 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--warning-gb);
+  margin: 0 0 10px;
+}
+
+/* App download row */
+.footer-app-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 34px 40px;
+  border-radius: 20px;
+}
+
+.footer-app-row p {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 50px;
+  padding: 26px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom .hover-style-link {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  margin-left: 28px;
+}
+
+.footer-bottom-left {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}

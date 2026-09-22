@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500"><defs><linearGradient id="g1156966038" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#123a7a"/><stop offset="1" stop-color="#2a6ae0"/>
+    </linearGradient></defs>
+    <rect width="800" height="500" fill="url(#g1156966038)"/>
+    <circle cx="624" cy="120" r="110" fill="rgba(255,255,255,.16)"/>
+    <circle cx="160" cy="410" r="150" fill="rgba(255,255,255,.10)"/>
+    <g transform="translate(120 320) scale(1.1)">
+    <ellipse cx="130" cy="88" rx="110" ry="9" fill="rgba(0,0,0,.14)"/>
+    <path d="M18 62 C18 46 30 44 52 42 L74 24 C80 18 90 16 104 16 L150 16 C166 16 176 22 186 34 L198 44 C220 46 240 50 240 62 L240 72 C240 78 236 82 228 82 L196 82 A24 24 0 0 0 148 82 L96 82 A24 24 0 0 0 48 82 L28 82 C20 82 18 76 18 62 Z" fill="#fdd300"/>
+    <path d="M84 40 L100 24 C104 20 110 20 116 20 L116 40 Z" fill="#22304d"/>
+    <path d="M126 20 L150 20 C158 20 164 24 170 32 L178 40 L126 40 Z" fill="#22304d"/>
+    <circle cx="72" cy="82" r="15" fill="#1c2333"/><circle cx="72" cy="82" r="6" fill="#9aa5bd"/>
+    <circle cx="172" cy="82" r="15" fill="#1c2333"/><circle cx="172" cy="82" r="6" fill="#9aa5bd"/>
+    <rect x="224" y="52" width="14" height="8" rx="4" fill="#fdd300"/>
+  </g>
+    <text x="24" y="456" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="600" fill="rgba(255,255,255,.85)">Travel guide</text>
+    <text x="24" y="480" font-family="Montserrat, Arial, sans-serif" font-size="11" fill="rgba(255,255,255,.55)">replace with your image</text></svg>
