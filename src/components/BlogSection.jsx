@@ -2,17 +2,17 @@ import Btn from "./Btn";
 
 const BLOGS = [
   {
-    img: "/assets/images/blog/6aabc714e2a79.webp",
+    img: `${import.meta.env.BASE_URL}assets/images/blog/6aabc714e2a79.webp`,
     date: "Sep 12, 2026",
     title: "রাইড শেয়ারিংয়ে বদলে যাচ্ছে বাংলাদেশের শহুরে পরিবহন ব্যবস্থা",
   },
   {
-    img: "/assets/images/blog/260920175045_g3UDrxr4bz.webp",
+    img: `${import.meta.env.BASE_URL}assets/images/blog/260920175045_g3UDrxr4bz.webp`,
     date: "Sep 05, 2026",
     title: "সিলেটের দর্শনীয় স্থান সমূহ, খাবার ও থাকার ব্যবস্থা",
   },
   {
-    img: "/assets/images/blog/260920175752_kbpbDIIOGX.webp",
+    img: `${import.meta.env.BASE_URL}assets/images/blog/260920175752_kbpbDIIOGX.webp`,
     date: "Aug 28, 2026",
     title: "নওগাঁর দর্শনীয় স্থান সমূহ, খাবার ও থাকার ব্যবস্থা",
   },

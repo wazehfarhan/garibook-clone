@@ -59,8 +59,8 @@ function Footer() {
             <div className="footer-main-wrap section-padding">
               <div className="footer-grid">
                 <div className="footer-brand-col">
-                  <a className="footer-logo" href="/">
-                    <img src="/assets/images/logo-white.svg" alt="Garibook" />
+                  <a className="footer-logo" href={import.meta.env.BASE_URL}>
+                    <img src={`${import.meta.env.BASE_URL}assets/images/logo-white.svg`} alt="Garibook" />
                   </a>
                   <div className="footer-socials">
                     {SOCIALS.map((s) => (

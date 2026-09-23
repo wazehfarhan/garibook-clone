@@ -18,7 +18,7 @@ function DownloadApp() {
             />
           </div>
           <div className="download-app-image">
-            <img src="/assets/images/app-with-logo.0f885eea.png" alt="Garibook apps" />
+            <img src={`${import.meta.env.BASE_URL}assets/images/app-with-logo.0f885eea.png`} alt="Garibook apps" />
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ function SmartDriver() {
             </div>
             <div className="smart-driver-image">
               <div className="no-commission-image" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="200">
-                <img src="/assets/images/no_commission_app_screen.png" alt="Smart Driver app" />
+                <img src={`${import.meta.env.BASE_URL}assets/images/no_commission_app_screen.png`} alt="Smart Driver app" />
               </div>
             </div>
           </div>

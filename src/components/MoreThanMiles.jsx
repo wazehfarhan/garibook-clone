@@ -1,16 +1,16 @@
 const MILES_ITEMS = [
   {
-    img: "/assets/images/services/Airport Rental_Webp.webp",
+    img: `${import.meta.env.BASE_URL}assets/images/services/Airport Rental_Webp.webp`,
     title: "Airport Rentals",
     delay: 200,
   },
   {
-    img: "/assets/images/services/family_trips.webp",
+    img: `${import.meta.env.BASE_URL}assets/images/services/family_trips.webp`,
     title: "Family Trips",
     delay: 300,
   },
   {
-    img: "/assets/images/services/Group Tour_Webp.webp",
+    img: `${import.meta.env.BASE_URL}assets/images/services/Group Tour_Webp.webp`,
     title: "Long Tours",
     delay: 400,
   },

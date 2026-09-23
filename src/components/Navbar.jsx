@@ -33,8 +33,8 @@ function Navbar() {
     <div className={`theme-navbar-wrapper ${isSticky ? "is-sticky" : ""}`}>
       <div className="container">
         <nav className="theme-navbar">
-          <a className="brand-logo" href="/" aria-label="Garibook home">
-            <img src="/assets/images/logo.svg" alt="Garibook" width="150" height="34" />
+          <a className="brand-logo" href={import.meta.env.BASE_URL} aria-label="Garibook home">
+            <img src={`${import.meta.env.BASE_URL}assets/images/logo.svg`} alt="Garibook" width="150" height="34" />
           </a>
 
           <div className={`offcanvas-body ${menuOpen ? "show" : ""}`}>

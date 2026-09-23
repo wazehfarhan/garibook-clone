@@ -21,8 +21,13 @@
   gap: 16px;
 }
 
+/* Fallback so grid tiles always paint: if the JS reveal never fires,
+ * nothing is left sitting at opacity 0 (AOS sets .aos-animate inline
+ * opacity/transform on the same nodes GSAP tweens). */
 .ba-grid-item {
   min-width: 0;
+  opacity: 1;
+  transform: none;
 }
 
 .ba-grid-item.col-8 {

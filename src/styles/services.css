@@ -89,59 +89,47 @@
 
 /* business / club / vms panes */
 /*
- * Tab panes stack: all 4 panes are always mounted and share ONE grid cell,
- * so the container height always equals the tallest pane. Switching tabs
- * never changes the section height (no jump), and there is never an empty
- * frame (no flash). The entering pane animates with a CSS keyframe that
- * starts at opacity 0 / translated on the pane's FIRST paint (re-triggered
- * by key={tab} on the parent, which remounts the tree each switch) —
- * unlike the old GSAP (setTab + requestAnimationFrame + fromTo), which let
- * the pane paint one frame at full opacity before the tween started.
- * Hidden panes are plain visibility:hidden with NO transition, so the old
- * pane vanishes in the same commit the new one appears. No JS measuring,
- * no ScrollTrigger.refresh, no GSAP on the panes.
+ * Tab panes stack: all 4 panes stay mounted and share ONE grid cell, so the
+ * container height always equals the TALLEST pane — hidden panes keep
+ * `display: block` (visibility: hidden) and keep sizing the cell. Switching
+ * tabs therefore never changes the section height: no jump, no
+ * ScrollTrigger.refresh, no JS measuring.
+ *
+ * The pane transition itself is a GSAP crossfade driven by switchTab() in
+ * Services.jsx: the outgoing pane stays visible (fading out) while the
+ * incoming pane fades/rises in, so there is never a blank frame. There is NO
+ * CSS animation on the panes on purpose — a CSS enter keyframe forces the
+ * incoming pane to start at opacity 0 while the old pane is already hidden,
+ * which produced a visible empty gap ("the section breaks for a moment").
  */
 .services-panes {
   display: grid;
 }
 
 .services-panes .tab-pane-inner {
+  display: block; /* author declaration — beats the UA's [hidden] { display: none }, so hidden panes keep laying out and sizing the grid */
   grid-area: 1 / 1;
   min-width: 0;
   visibility: visible;
 }
 
 .services-panes .tab-pane-inner[hidden] {
-  display: block;
+  /* no display here: the pane must keep its natural display (block/flex)
+   * whether hidden or not, otherwise its intrinsic height changes with
+   * visibility and the shared grid track (section height) jumps. */
   visibility: hidden;
   pointer-events: none;
   user-select: none;
 }
 
-.services-panes .tab-pane-inner:not([hidden]) {
-  animation: tab-pane-enter 0.35s ease both;
-}
+/* No CSS animation on the panes — the crossfade is GSAP-driven in
+ * Services.jsx switchTab() so the outgoing pane stays visible while the
+ * incoming one fades in (single animation owner, never a blank frame). */
 
-@media (prefers-reduced-motion: reduce) {
-  .services-panes .tab-pane-inner:not([hidden]) {
-    animation: none;
-  }
-}
-
-/* Entry animation for the newly shown pane. `both` fill keeps the first
- * keyframe applied before the first paint, so no flash frame. */
-@keyframes tab-pane-enter {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.service-split-pane {
+/* Higher-specificity selector so it TIES .services-panes .tab-pane-inner
+ * and wins by source order — split panes must stay flex (side-by-side, same
+ * intrinsic height) even when [hidden], for a stable grid track. */
+.services-panes .service-split-pane {
   display: flex;
   align-items: center;
   gap: 48px;
@@ -189,6 +177,13 @@
   .service-split-pane .split-text h2 {
     font-size: 30px;
     line-height: 38px;
+  }
+  /* Wrapped split panes: pack the text/image lines at the top so the
+   * shared-track slack collects at the section bottom instead of being
+   * stretched as a big gap between the text and the picture. Single-line
+   * (desktop) layouts are unaffected — they keep align-items: center. */
+  .services-panes .service-split-pane {
+    align-content: flex-start;
   }
 }
 

@@ -1,16 +1,16 @@
 const FREEDOM_ITEMS = [
   {
-    icon: "/assets/images/icon_car.svg",
+    icon: `${import.meta.env.BASE_URL}assets/images/icon_car.svg`,
     title: "Choose the Car",
     text: "Pick what suits your comfort.",
   },
   {
-    icon: "/assets/images/icon_driver.svg",
+    icon: `${import.meta.env.BASE_URL}assets/images/icon_driver.svg`,
     title: "Choose the Driver",
     text: "Based on ratings and reviews.",
   },
   {
-    icon: "/assets/images/icon_fare.svg",
+    icon: `${import.meta.env.BASE_URL}assets/images/icon_fare.svg`,
     title: "Choose the Fare",
     text: "Select the bid that fits your budget.",
   },
@@ -29,7 +29,7 @@ function FreedomSection() {
         <div className="section-content section-margin-mt-50">
           <div className="freedom-inner-image" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="200">
             <img
-              src="/assets/images/garibook_freedom.webp"
+              src={`${import.meta.env.BASE_URL}assets/images/garibook_freedom.webp`}
               alt="Freedom in every journey"
               className="rounded-top-3"
             />
