@@ -79,16 +79,10 @@
   width: auto;
 }
 
-.footer-brand-col p {
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 15px;
-  line-height: 26px;
-  margin: 20px 0 24px;
-}
-
 .footer-socials {
   display: flex;
   gap: 12px;
+  margin-top: 22px;
 }
 
 .footer-socials a {
@@ -232,4 +226,39 @@
 .footer-bottom-left {
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
+}
+
+/* Contact address (plain text, no link) */
+.footer-contact-address {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 15px;
+}
+
+/* Download Our Garibook Mobile App CTA section */
+.footer-app-download {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 44px;
+  padding: 30px 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+
+.footer-app-download-text {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Trade license number in bottom bar */
+.footer-bottom-license {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  margin-left: 28px;
 }

@@ -1,9 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState } from "react";
 import Btn from "./Btn";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const RIDE_CARDS = [
   {
@@ -36,164 +32,6 @@ function SectionBtnRow({ btnClass = "theme-primary-btn", value = "Learn More" })
 
 function Services() {
   const [tab, setTab] = useState("rides");
-  const [stackHeight, setStackHeight] = useState(0);
-  const sectionRef = useRef(null);
-  const cardsRowRef = useRef(null);
-  const stackRef = useRef(null);
-
-  /*
-   * Height lock for the tab area.
-   * Every pane is always mounted and stacked in the same CSS grid cell
-   * (see .tab-stack in services.css), so the section keeps ONE height while
-   * switching tabs instead of jumping.
-   *
-   * The grid row is sized from the tallest pane we measure, because the
-   * browser's own "max-content" estimate of these panes is unstable (they
-   * contain percentage-width flex items and images), which is exactly what
-   * made the section resize when a tab changed.
-   */
-  useEffect(() => {
-    const stack = stackRef.current;
-    if (!stack) return undefined;
-    let mounted = false;
-
-    const measure = () => {
-      const panes = Array.from(stack.querySelectorAll(".tab-pane-inner"));
-      if (!panes.length) return;
-
-      // Temporarily reveal every pane at its natural height and measure it.
-      const prevHidden = panes.map((p) => p.hidden);
-      const prevAlign = panes.map((p) => p.style.alignSelf);
-      const prevRows = stack.style.gridTemplateRows;
-      stack.style.gridTemplateRows = "auto";
-      panes.forEach((p) => {
-        p.hidden = false;
-        p.style.alignSelf = "start";
-      });
-      const tallest = Math.max(...panes.map((p) => p.offsetHeight));
-      panes.forEach((p, i) => {
-        p.hidden = prevHidden[i];
-        p.style.alignSelf = prevAlign[i];
-      });
-      stack.style.gridTemplateRows = prevRows;
-
-      setStackHeight((h) => (Math.abs(h - tallest) > 1 ? tallest : h));
-
-      // Locking the height changes the page layout, so ScrollTrigger has to
-      // recompute where the animations start.
-      if (mounted) ScrollTrigger.refresh();
-    };
-
-    measure();
-    mounted = true;
-    const raf = requestAnimationFrame(measure);
-
-    // Re-measure once every image has decoded, otherwise text/image swapping
-    // could leave us with a slightly wrong (too small) locked height.
-    const imgs = Array.from(stack.querySelectorAll("img"));
-    const pending = imgs.filter((img) => !img.complete);
-    pending.forEach((img) => img.addEventListener("load", measure));
-
-    let timer = null;
-    let cancelled = false;
-    const onResize = () => {
-      clearTimeout(timer);
-      timer = setTimeout(measure, 150);
-    };
-    window.addEventListener("resize", onResize);
-    window.addEventListener("load", measure);
-    // Webfonts can change text metrics (and therefore wrapping), so measure again.
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready
-        .then(() => {
-          if (!cancelled) measure();
-        })
-        .catch(() => {});
-    }
-    return () => {
-      cancelled = true;
-      cancelAnimationFrame(raf);
-      clearTimeout(timer);
-      pending.forEach((img) => img.removeEventListener("load", measure));
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener("load", measure);
-    };
-  }, []);
-
-  /*
-   * GSAP animation #2 — service cards stagger reveal.
-   * First reveal: the cards slide up + fade in one after another as the
-   * section scrolls into view (ScrollTrigger, plays once).
-   * If the section is already on screen — e.g. the user just switched back to
-   * the Rides tab — the reveal plays immediately, so the cards can never be
-   * left invisible waiting for a scroll that already happened.
-   */
-  useEffect(() => {
-    if (tab !== "rides") return undefined;
-    const row = cardsRowRef.current;
-    if (!row) return undefined;
-
-    const cards = Array.from(row.children);
-    let trigger = null;
-
-    const ctx = gsap.context(() => {
-      const tween = gsap.fromTo(
-        cards,
-        { y: 70, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          stagger: 0.15,
-          ease: "power3.out",
-          paused: true,
-        }
-      );
-
-      if (ScrollTrigger.isInViewport(row, 0.15)) {
-        tween.play();
-      } else {
-        trigger = ScrollTrigger.create({
-          trigger: row,
-          start: "top 85%",
-          once: true,
-          onEnter: () => tween.play(),
-        });
-      }
-    }, sectionRef);
-
-    return () => {
-      if (trigger) trigger.kill();
-      ctx.revert();
-      gsap.set(cards, { clearProps: "opacity,transform" });
-    };
-  }, [tab]);
-
-  /*
-   * Keep ScrollTrigger's cached positions in sync.
-   * The page keeps settling after first paint (webfonts, images, the locked
-   * tab height), and a stale position would make the cards reveal fire at the
-   * wrong scroll offset — or not at all. Watching the body size and refreshing
-   * ScrollTrigger on change keeps the reveal accurate.
-   */
-  useEffect(() => {
-    let raf = 0;
-    const refresh = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => ScrollTrigger.refresh());
-    };
-    const observer = new ResizeObserver(refresh);
-    observer.observe(document.body);
-    window.addEventListener("load", refresh);
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(refresh).catch(() => {});
-    }
-    return () => {
-      cancelAnimationFrame(raf);
-      observer.disconnect();
-      window.removeEventListener("load", refresh);
-    };
-  }, []);
 
   const tabs = [
     { key: "rides", label: "Rides" },
@@ -223,6 +61,15 @@ function Services() {
     },
   ];
 
+  /*
+   * All 4 panes stay mounted and share ONE CSS grid cell (.services-panes
+   * in services.css). The container height always equals the tallest pane
+   * so switching tabs never changes the section height (no jump), and
+   * there is never an empty frame (no flash). Only the entering pane
+   * animates (pure-CSS keyframes, re-triggered by key={tab}).
+   * (No lookup variable needed — panes map directly with hidden={...}.)
+   */
+
   return (
     <section className="service-wrapper section-padding">
       <div className="container">
@@ -248,9 +95,8 @@ function Services() {
         </div>
 
         <div
-          className="section-content section-margin-mt-50 tab-stack"
-          ref={stackRef}
-          style={stackHeight ? { gridTemplateRows: `${stackHeight}px` } : undefined}
+          className="section-content section-margin-mt-50 services-panes"
+          key={tab}
         >
           <div
             className="tab-pane-inner"
@@ -258,17 +104,19 @@ function Services() {
             aria-label="Rides"
             hidden={tab !== "rides"}
           >
-            <div className="section-header mb-5" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+            <div className="section-header mb-5">
               <h2>
                 Every Ride <br /> One Platform
               </h2>
             </div>
-            <div className="service-cards-row" ref={cardsRowRef}>
+            <div
+              className="service-cards-row"
+              data-aos="fade-up"
+              data-aos-duration="600"
+              data-aos-delay="200"
+            >
               {RIDE_CARDS.map((card) => (
-                <div
-                  key={card.title}
-                  className="service-card-col"
-                >
+                <div key={card.title} className="service-card-col">
                   <div className="box-item-wrap-one">
                     <div className="box-iwo-img">
                       <img src={card.img} alt={card.title} className="mt-2" />
@@ -297,7 +145,12 @@ function Services() {
                 <SectionBtnRow />
               </div>
               <div className="split-image">
-                <img src={pane.img} alt={pane.title} />
+                <img
+                  src={pane.img}
+                  alt={pane.title}
+                  width="640"
+                  height="640"
+                />
               </div>
             </div>
           ))}

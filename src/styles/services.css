@@ -89,24 +89,56 @@
 
 /* business / club / vms panes */
 /*
- * Tab panes stack: all panes occupy the SAME grid cell, so the container
- * height always equals the tallest pane. Switching tabs never changes the
- * section height (no layout jump), and it stays fully responsive.
+ * Tab panes stack: all 4 panes are always mounted and share ONE grid cell,
+ * so the container height always equals the tallest pane. Switching tabs
+ * never changes the section height (no jump), and there is never an empty
+ * frame (no flash). The entering pane animates with a CSS keyframe that
+ * starts at opacity 0 / translated on the pane's FIRST paint (re-triggered
+ * by key={tab} on the parent, which remounts the tree each switch) —
+ * unlike the old GSAP (setTab + requestAnimationFrame + fromTo), which let
+ * the pane paint one frame at full opacity before the tween started.
+ * Hidden panes are plain visibility:hidden with NO transition, so the old
+ * pane vanishes in the same commit the new one appears. No JS measuring,
+ * no ScrollTrigger.refresh, no GSAP on the panes.
  */
-.tab-stack {
+.services-panes {
   display: grid;
 }
 
-.tab-stack .tab-pane-inner {
+.services-panes .tab-pane-inner {
   grid-area: 1 / 1;
   min-width: 0;
+  visibility: visible;
 }
 
-.tab-stack .tab-pane-inner[hidden] {
+.services-panes .tab-pane-inner[hidden] {
   display: block;
   visibility: hidden;
   pointer-events: none;
   user-select: none;
+}
+
+.services-panes .tab-pane-inner:not([hidden]) {
+  animation: tab-pane-enter 0.35s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-panes .tab-pane-inner:not([hidden]) {
+    animation: none;
+  }
+}
+
+/* Entry animation for the newly shown pane. `both` fill keeps the first
+ * keyframe applied before the first paint, so no flash frame. */
+@keyframes tab-pane-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .service-split-pane {
@@ -135,7 +167,14 @@
 
 .service-split-pane .split-image {
   flex: 1 1 380px;
+  min-width: 0;
   text-align: center;
+}
+
+.service-split-pane .split-image img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
 }
 
 .service-split-pane .split-image img {

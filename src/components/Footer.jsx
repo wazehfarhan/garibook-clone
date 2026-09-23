@@ -62,13 +62,6 @@ function Footer() {
                   <a className="footer-logo" href="/">
                     <img src="/assets/images/logo-white.svg" alt="Garibook" />
                   </a>
-                  <p className="footer-app-text text-white">
-                    Download our Customer, Smart Driver and Enterprise App
-                  </p>
-                  <Btn
-                    className="theme-warning-btn"
-                    url="https://onelink.to/gbweb"
-                  />
                   <div className="footer-socials">
                     {SOCIALS.map((s) => (
                       <a key={s} href={`#${s}`} aria-label={s} className="footer-social-link">
@@ -106,9 +99,19 @@ function Footer() {
                         +88 09 678 11 22 33
                       </a>
                     </li>
+                    <li>
+                      <span className="footer-contact-address">
+                        Police Plaza Concord Tower -01, 13th Floor, Plot-02, Road- 144, Gulshan, Dhaka-1212
+                      </span>
+                    </li>
                   </ul>
                 </div>
               </div>
+            </div>
+
+            <div className="footer-app-download">
+              <p className="footer-app-download-text">Download Our Garibook Mobile App</p>
+              <Btn className="theme-warning-btn" url="https://onelink.to/gbweb" />
             </div>
 
             <div className="footer-partners">
@@ -126,7 +129,7 @@ function Footer() {
           </div>
 
           <div className="footer-bottom">
-            <p>&copy; {new Date().getFullYear()} Garibook. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Garibook.com</p>
             <div className="footer-bottom-links">
               <a className="hover-style-link" href="#">
                 Terms &amp; Conditions
@@ -134,6 +137,9 @@ function Footer() {
               <a className="hover-style-link" href="#">
                 Privacy Policy
               </a>
+              <span className="footer-bottom-license">
+                Trade license number: TRAD/DNCC/013806/2024
+              </span>
             </div>
           </div>
         </div>
