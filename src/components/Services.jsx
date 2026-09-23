@@ -264,12 +264,9 @@ function Services() {
               </h2>
             </div>
             <div className="service-cards-row" ref={cardsRowRef}>
-              {RIDE_CARDS.map((card, i) => (
+              {RIDE_CARDS.map((card) => (
                 <div
                   key={card.title}
-                  data-aos="fade-up"
-                  data-aos-duration="600"
-                  data-aos-delay={i * 200}
                   className="service-card-col"
                 >
                   <div className="box-item-wrap-one">
@@ -299,7 +296,7 @@ function Services() {
                 <p className="my-4">{pane.text}</p>
                 <SectionBtnRow />
               </div>
-              <div className="split-image" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="200">
+              <div className="split-image">
                 <img src={pane.img} alt={pane.title} />
               </div>
             </div>

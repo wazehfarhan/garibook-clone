@@ -2,19 +2,19 @@ import Btn from "./Btn";
 
 const BLOGS = [
   {
-    img: "/assets/images/blog/blog1.svg",
+    img: "/assets/images/blog/6aabc714e2a79.webp",
     date: "Sep 12, 2026",
-    title: "5 Scenic Road Trips from Dhaka You Should Take This Winter",
+    title: "রাইড শেয়ারিংয়ে বদলে যাচ্ছে বাংলাদেশের শহুরে পরিবহন ব্যবস্থা",
   },
   {
-    img: "/assets/images/blog/blog2.svg",
+    img: "/assets/images/blog/260920175045_g3UDrxr4bz.webp",
     date: "Sep 05, 2026",
-    title: "How Fare Bidding Works: Getting the Best Price for Your Ride",
+    title: "সিলেটের দর্শনীয় স্থান সমূহ, খাবার ও থাকার ব্যবস্থা",
   },
   {
-    img: "/assets/images/blog/blog3.svg",
+    img: "/assets/images/blog/260920175752_kbpbDIIOGX.webp",
     date: "Aug 28, 2026",
-    title: "Airport Pick-up and Drop: A Stress-Free Guide for Travellers",
+    title: "নওগাঁর দর্শনীয় স্থান সমূহ, খাবার ও থাকার ব্যবস্থা",
   },
 ];
 

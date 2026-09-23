@@ -140,10 +140,10 @@
   position: absolute;
   content: "";
   left: max(16px, calc((100vw - 1320px) / 2 + 16px));
-  bottom: -15px;
+  bottom: -5px;
   width: 234px;
   height: 109px;
-  background-image: url("/assets/images/sedan.svg");
+  background-image: url("/assets/images/Sedan_GiF.9efd9ae4.gif");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left bottom;

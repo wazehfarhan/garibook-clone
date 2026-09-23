@@ -36,6 +36,31 @@
   font-weight: 100 900;
   font-display: swap;
 }
+/* Bengali text (garibook.com serves "Li Ador Noirrit" for Bangla) */
+@font-face {
+  font-family: "Li Ador Noirrit";
+  src: url("/fonts/LiAdorNoirrit-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Li Ador Noirrit";
+  src: url("/fonts/LiAdorNoirrit-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Li Ador Noirrit";
+  src: url("/fonts/LiAdorNoirrit-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Li Ador Noirrit";
+  src: url("/fonts/LiAdorNoirrit-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
 
 /* ============ Design tokens (extracted from garibook.com) ============ */
 :root {
@@ -48,7 +73,7 @@
   --muted: #6d6d6d;
   --light-gray-gb: #f1f6ff;
   --border: #e5e5e5;
-  --heading-font: "Montserrat", sans-serif;
+  --heading-font: "Montserrat", "Li Ador Noirrit", sans-serif;
   --nav-font: "Uncut Sans", sans-serif;
 }
 

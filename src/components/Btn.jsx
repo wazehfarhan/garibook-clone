@@ -1,6 +1,10 @@
 function Btn({ value = "Download App", url = "#", className = "", icon = true }) {
   return (
-    <a className={className.trim()} href={url} target="_blank" rel="noopener noreferrer">
+    <a
+      className={className.trim()}
+      href={url}
+      {...(/^https?:\/\//i.test(url) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
       <span className="btn-label">{value}</span>
       {icon && (
         <svg

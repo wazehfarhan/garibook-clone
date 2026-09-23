@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
 const COUNTERS = [
-  { label: "Trip Requests", value: 300000, delay: 300 },
-  { label: "Total Customers", value: 850000, delay: 650 },
+  { label: "Trip Requests", value: 300000, delay: 1000 },
+  { label: "Total Customers", value: 850000, delay: 750 },
   { label: "Active Drivers", value: 35000, delay: 1000 },
   { label: "District Covered", value: 64, delay: 1350 },
 ];

@@ -178,7 +178,7 @@
 .blog-card h4 {
   font-size: 19px;
   font-weight: 700;
-  line-height: 27px;
+  line-height: 30px;
   margin: 10px 0 14px;
   color: #121212;
 }
@@ -190,13 +190,43 @@
 }
 
 /* ============ Download app CTA ============ */
+/*
+ * The app artwork is anchored to the bottom-right corner of the blue card
+ * (same technique as garibook.com, where it is a bottom:0 / right:100px
+ * ::after). It is taken out of the flex flow so it can sit flush with the
+ * card's bottom edge without stretching the section.
+ */
 .download-app-content {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 32px;
-  padding: 56px;
-  flex-wrap: wrap;
+  padding: 48px 56px;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.download-app-image {
+  position: absolute;
+  right: 56px;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+.download-app-image img {
+  display: block;
+  width: auto;
+  height: 320px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.common-section-layout-three-text {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
 }
 
 .common-section-layout-three-text h2 {
@@ -211,14 +241,31 @@
   margin: 0;
 }
 
-.download-app-image img {
-  max-width: 520px;
-  width: 100%;
+@media (max-width: 992px) {
+  .download-app-content {
+    padding: 40px 40px 260px;
+    min-height: 0;
+  }
+  .download-app-image {
+    right: 40px;
+  }
+  .download-app-image img {
+    height: 240px;
+  }
+  .common-section-layout-three-text {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
   .download-app-content {
-    padding: 28px;
+    padding: 28px 28px 220px;
+  }
+  .download-app-image {
+    right: 28px;
+  }
+  .download-app-image img {
+    height: 190px;
   }
   .common-section-layout-three-text h2 {
     font-size: 28px;
