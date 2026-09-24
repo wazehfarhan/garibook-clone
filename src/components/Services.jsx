@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Btn from "./Btn";
@@ -41,6 +41,32 @@ function Services() {
   const cardsRef = useRef(null);
   const stackRef = useRef(null);
   const animatingRef = useRef(false);
+  // Current tab as a ref: GSAP's onComplete (and a click queued from it)
+  // must read the LIVE tab, not the value captured when the tween started.
+  const tabRef = useRef("rides");
+  // Clicks that arrive mid-crossfade are queued here (last one wins)
+  // instead of being silently dropped, and run right after the tween ends.
+  const pendingRef = useRef(null);
+
+  useEffect(() => {
+    tabRef.current = tab;
+  }, [tab]);
+
+  /*
+   * Strip GSAP's leftover inline styles (opacity/transform/zIndex/...) from
+   * panes that are hidden again. useLayoutEffect runs right after React
+   * commits `hidden` and BEFORE the browser paints, so the outgoing pane
+   * (which ends its fade at opacity 0) can never pop back to full opacity
+   * for one frame — the ghost flash that used to appear at the end of
+   * every tab transition.
+   */
+  useLayoutEffect(() => {
+    stackRef.current?.querySelectorAll("[data-pane]").forEach((pane) => {
+      if (pane.hasAttribute("hidden")) {
+        gsap.set(pane, { clearProps: "opacity,transform,zIndex,pointerEvents" });
+      }
+    });
+  });
 
   /*
    * GSAP animation #2 — service cards scroll reveal.
@@ -112,9 +138,16 @@ function Services() {
    * The outgoing pane is only re-hidden in the tween's onComplete.
    */
   const switchTab = (key) => {
-    if (key === tab || animatingRef.current) return;
+    if (animatingRef.current) {
+      // A click during the crossfade is queued (last one wins) instead of
+      // being ignored, so every click lands — it runs in onComplete below.
+      pendingRef.current = key;
+      return;
+    }
 
-    const outgoingKey = tab;
+    const outgoingKey = tabRef.current;
+    if (key === outgoingKey) return;
+
     const panes = stackRef.current;
     const outgoing = panes?.querySelector(`[data-pane="${outgoingKey}"]`);
     const incoming = panes?.querySelector(`[data-pane="${key}"]`);
@@ -130,23 +163,37 @@ function Services() {
     }
 
     animatingRef.current = true;
+
+    // Kill any stale tween and set the crossfade start styles SYNCHRONOUSLY,
+    // while the incoming pane is still hidden. That way no paint can ever
+    // show it at full opacity before the tween begins — including the
+    // queued-click path, where setState commits outside this event handler.
+    gsap.killTweensOf([incoming, outgoing]);
+    gsap.set(incoming, { opacity: 0, y: 16, zIndex: 2 });
+    gsap.set(outgoing, { pointerEvents: "none", zIndex: 1 });
+
     setVisible((v) => (v.includes(key) ? v : [...v, key]));
 
-    // Runs before the browser paints the commit, so the incoming pane never
-    // flashes at full opacity before the tween starts.
+    // Start styles were already set synchronously above; the timeline starts
+    // on the next frame, before any paint of the newly un-hidden pane.
     requestAnimationFrame(() => {
-      gsap.killTweensOf([incoming, outgoing]);
-      gsap.set(incoming, { opacity: 0, y: 16, zIndex: 2 });
-      gsap.set(outgoing, { pointerEvents: "none", zIndex: 1 });
-
       gsap
         .timeline({
           onComplete: () => {
             setVisible((v) => v.filter((k) => k !== outgoingKey));
-            gsap.set([incoming, outgoing], {
+            // Clear ONLY the incoming (now active) pane: it ends at its
+            // natural styles, so clearing changes nothing visually. The
+            // outgoing pane keeps opacity 0 until React commits `hidden`;
+            // the useLayoutEffect above strips its styles after that
+            // commit — never during a paint where it is still visible.
+            gsap.set(incoming, {
               clearProps: "opacity,transform,zIndex,pointerEvents",
             });
             animatingRef.current = false;
+            // Run the click that arrived during this crossfade, if any.
+            const queued = pendingRef.current;
+            pendingRef.current = null;
+            if (queued) switchTab(queued);
           },
         })
         .to(outgoing, { opacity: 0, duration: 0.3, ease: "power1.out" }, 0)
